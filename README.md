@@ -150,7 +150,11 @@ echo "vm.max_map_count=120000" | sudo tee /etc/sysctl.d/90-vm_max_map_count.conf
 - **Recommended:** Installing the package via pip.
 
 ```sh
+# Only for the current user (will only be able to scan the current user's processes):
 pip install vmaudit
+
+# Alternative: Global install to be able to scan all system processes (recommended).
+sudo pip install vmaudit
 ```
 
 - **Alternative:** Installing the package directly from source.
@@ -158,17 +162,28 @@ pip install vmaudit
 ```sh
 git clone https://github.com/Arcitec/vmaudit.git
 cd vmaudit
+
+# User installation.
 pip install .
+
+# Alternative: Global installation (recommended).
+sudo pip install .
 ```
 
 - Note: In all of these examples, it's recommended to replace the `pip` command
   with [pipx](https://pipx.pypa.io/stable/installation/) instead, which installs
-  CLI tools into isolated environments for improved reliability.
+  CLI tools into isolated environments for improved reliability. However, you
+  should never run "sudo pipx", since the per-user pipx installation is runnable
+  as root without needing to be installed globally.
 
 - If you ever want to remove the package again, run the `uninstall` command.
 
 ```sh
+# User installation.
 pip uninstall vmaudit
+
+# Alternative: If you've installed it globally.
+sudo pip uninstall vmaudit
 ```
 
 - You can also run the package directly from source code without installing it.
@@ -177,25 +192,32 @@ pip uninstall vmaudit
 
 ## How to Use `vmaudit`
 
-- Running the virtual memory analyzer when it has been installed as a package.
+- Running the virtual memory analyzer when it has been **installed as a package**.
 
 ```sh
 # Scanning the current user's processes:
 vmaudit
 
 # Scanning all processes on the system:
+# NOTE: Only works if you've installed vmaudit via "sudo pip".
+sudo vmaudit
+
+# Alternative: Scanning all processes on the system (only for "pipx" installs):
 sudo "$(which vmaudit)"
 ```
 
-- Alternative: Running directly from source code.
+- Alternative: Running **directly from source code**. Supports both user and
+  system scans.
 
 ```sh
+# Scanning the current user's processes:
 python src/vmaudit
 
+# Scanning all processes on the system:
 sudo python src/vmaudit
 ```
 
-- If you know the maximum number of VMAs observed or expected for a process,
+- If you know the **maximum number of VMAs** observed or expected for a process,
   then you can provide it directly to receive a custom recommendation.
 
 ```sh
