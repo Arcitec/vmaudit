@@ -3,6 +3,8 @@
 Analyzes Virtual Memory Area (VMA) utilization to provide data-driven
 recommendations for system administrators and developers.
 
+[![PyPI Package](https://badge.fury.io/py/vmaudit.svg)](https://pypi.org/project/vmaudit/)
+
 
 ## Understanding Linux Virtual Memory Areas (VMAs)
 
