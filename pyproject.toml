@@ -1,6 +1,6 @@
 [project]
 name = "vmaudit"
-version = "1.0.0"
+version = "1.0.1"
 description = "Analyzes Virtual Memory Area (VMA) utilization to provide data-driven recommendations for system administrators and developers."
 authors = [{ name = "Arcitec" }]
 license = "GPL-2.0-only"
